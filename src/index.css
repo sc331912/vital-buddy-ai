@@ -2,39 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Smart Health Buddy Design System - Healthcare Theme with Cyan & Dark Green 
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Healthcare Theme - Light Mode */
+    --background: 210 20% 98%;
+    --foreground: 160 35% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 160 35% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 160 35% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary: Dark Forest Green */
+    --primary: 160 35% 25%;
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 160 45% 35%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary: Medical Cyan */
+    --secondary: 185 85% 55%;
+    --secondary-foreground: 0 0% 98%;
+    --secondary-glow: 185 95% 65%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Healthcare accents */
+    --muted: 200 15% 95%;
+    --muted-foreground: 160 20% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 185 75% 92%;
+    --accent-foreground: 160 35% 25%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 200 20% 88%;
+    --input: 200 15% 94%;
+    --ring: 185 85% 55%;
+
+    /* Custom Healthcare Colors */
+    --health-success: 120 60% 45%;
+    --health-warning: 45 95% 55%;
+    --health-info: 210 85% 60%;
+    --health-light: 185 40% 96%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(160 35% 25%) 0%, hsl(185 85% 35%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(160 40% 20%) 0%, hsl(185 60% 40%) 50%, hsl(200 70% 50%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(185 30% 98%) 100%);
+    --gradient-feature: linear-gradient(120deg, hsl(185 85% 55%) 0%, hsl(160 35% 35%) 100%);
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -2px hsl(185 85% 55% / 0.1);
+    --shadow-medium: 0 8px 25px -5px hsl(160 35% 25% / 0.15);
+    --shadow-strong: 0 20px 40px -10px hsl(160 35% 25% / 0.2);
+    --shadow-glow: 0 0 30px hsl(185 85% 55% / 0.3);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --radius: 0.5rem;
 
@@ -101,5 +129,183 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+  
+  /* Healthcare Component Styles */
+  .health-gradient {
+    background: var(--gradient-primary);
+  }
+  
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  .card-gradient {
+    background: var(--gradient-card);
+  }
+  
+  .feature-gradient {
+    background: var(--gradient-feature);
+  }
+  
+  .glow-effect {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .health-transition {
+    transition: var(--transition-smooth);
+  }
+  
+  .bounce-transition {
+    transition: var(--transition-bounce);
+  }
+  
+  /* Interactive Animations */
+  .float-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  .slide-up {
+    animation: slide-up 0.6s ease-out;
+  }
+  
+  .fade-in-scale {
+    animation: fade-in-scale 0.5s ease-out;
+  }
+  
+  /* Hover Effects */
+  .hover-lift {
+    @apply health-transition hover:transform hover:-translate-y-2 hover:shadow-strong;
+  }
+  
+  .hover-glow {
+    @apply health-transition hover:glow-effect;
+  }
+  
+  .hover-scale {
+    @apply health-transition hover:transform hover:scale-105;
+  }
+}
+
+@layer components {
+  /* Healthcare Button Variants */
+  .btn-hero {
+    @apply px-8 py-4 bg-gradient-to-r from-secondary to-secondary-glow text-secondary-foreground 
+           font-semibold rounded-xl shadow-medium hover:shadow-strong hover:scale-105 
+           health-transition focus:ring-4 focus:ring-secondary/30;
+  }
+  
+  .btn-primary-health {
+    @apply px-6 py-3 health-gradient text-primary-foreground font-medium rounded-lg
+           shadow-soft hover:shadow-medium hover:-translate-y-1 health-transition
+           focus:ring-4 focus:ring-primary/30;
+  }
+  
+  .btn-outline-health {
+    @apply px-6 py-3 border-2 border-secondary text-secondary bg-transparent
+           font-medium rounded-lg hover:bg-secondary hover:text-secondary-foreground
+           health-transition focus:ring-4 focus:ring-secondary/30;
+  }
+  
+  /* Feature Cards */
+  .feature-card {
+    @apply card-gradient p-6 rounded-2xl shadow-soft hover:shadow-medium
+           hover:-translate-y-2 health-transition border border-border/50;
+  }
+  
+  /* Stats Cards */
+  .stats-card {
+    @apply bg-background/80 backdrop-blur-sm p-6 rounded-xl shadow-soft
+           border border-secondary/20 text-center;
+  }
+  
+  /* Chat Interface */
+  .chat-bubble-user {
+    @apply bg-secondary text-secondary-foreground px-4 py-2 rounded-2xl
+           rounded-br-md max-w-xs ml-auto shadow-soft;
+  }
+  
+  .chat-bubble-bot {
+    @apply bg-card text-card-foreground px-4 py-2 rounded-2xl
+           rounded-bl-md max-w-xs mr-auto shadow-soft border border-border/50;
+  }
+  
+  /* Health Status Indicators */
+  .status-success {
+    @apply bg-health-success/10 text-health-success border border-health-success/20;
+  }
+  
+  .status-warning {
+    @apply bg-health-warning/10 text-health-warning border border-health-warning/20;
+  }
+  
+  .status-info {
+    @apply bg-health-info/10 text-health-info border border-health-info/20;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(185 85% 55% / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px hsl(185 85% 55% / 0.6);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-5deg);
   }
 }
